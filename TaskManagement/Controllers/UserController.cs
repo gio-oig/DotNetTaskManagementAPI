@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TaskManagement.Models.DTO.User;
 using TaskManagement.Services.User;
 
@@ -15,6 +16,7 @@ namespace TaskManagement.Controllers
         }
 
         [HttpPost("Add")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Add([FromBody] CreateUserRequestDto newUser)
         {
             var res = await _userService.Add(newUser);
